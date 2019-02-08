@@ -3,7 +3,7 @@
 $query = $_GET['query']; // get the query from the get request
 // establish connection with db
 $db_connection = mysql_connect("localhost", "cs143", "");
-mysql_select_db("CS143", $db_connection); //
+mysql_select_db("TEST", $db_connection); //
 ?>
 <html>
   <body>
