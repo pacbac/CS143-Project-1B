@@ -101,8 +101,8 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
     $sex = $_POST["sex"];
     $dob = $_POST["dob"];
     $dod = $_POST["dod"];
-    if (isset($table) && isset($firstname) && isset($lastname)
-      && isset($dob)) {
+    if (issetStr($table) && issetStr($firstname) && issetStr($lastname)
+      && issetStr($dob)) {
       // extra check exists because directors don't need gender to be stored
       if ($table == "Actor" && !isset($sex))
         return print_error("Actor must have a valid gender to be added to site.");

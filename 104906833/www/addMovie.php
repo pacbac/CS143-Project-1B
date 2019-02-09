@@ -118,7 +118,7 @@ function postMovie($title, $year, $rating, $company, $genres){
   $company = $_POST["company"];
   $genres = $_POST["genre"];
   // if all required params are valid and posting was valid
-  if(isset($title) && isset($year) && isset($rating) && isset($company)
+  if(issetStr($title) && isset($year) && issetStr($rating) && issetStr($company)
     && !postMovie($title, $year, $rating, $company, $genres))
     header("Location: success.php");
   ?>

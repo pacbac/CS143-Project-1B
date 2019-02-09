@@ -13,7 +13,7 @@
     $rs = mysql_query("SELECT id FROM MaxPersonID", $db_connection);
     if (!$rs) {
       if (mysql_error() != "Query was empty")
-        print_error('Query failed: ' . mysql_error());
+        return print_error('Query failed: ' . mysql_error());
     } else {
       if($row = mysql_fetch_row($rs))
         return ($row[0] ? $row[0] : -1);
@@ -36,7 +36,7 @@
     $rs = mysql_query("SELECT id FROM MaxMovieID", $db_connection);
     if (!$rs) {
       if (mysql_error() != "Query was empty")
-        die('Query failed: ' . mysql_error());
+        return print_error('Query failed: ' . mysql_error());
     } else {
       if($row = mysql_fetch_row($rs))
         return ($row[0] ? $row[0] : -1);
@@ -51,5 +51,24 @@
       print_error("Could not update the next available person ID...");
     else
       echo "Successfully added movie!";
+  }
+
+  function getMovieList(){
+    global $db_connection;
+    $movie_list = array();
+    if(!($rs = mysql_query("SELECT id, title FROM Movie", $db_connection)))
+      print_error("Could not retrieve movie list.");
+    else {
+      while($row = mysql_fetch_row($rs)){
+        if($row[0] && $row[1])
+          $movie_list[] = $row;
+      }
+    }
+    return $movie_list;
+  }
+
+  // use when stuff was echo'd before a failed header redirect attempt
+  function issetStr($str){
+    return isset($str) && $str != "";
   }
 ?>
