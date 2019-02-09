@@ -92,11 +92,29 @@ nav {
 }
 
 form {
-  border: blue 3px solid;
+  margin: 20px 0;
+  border: #ff5733 3px solid;
+  padding: 25px 15px;
 }
 
 form div {
   width: 400px;
-  padding: 20px;
-  font-size: 14px;
+  padding: 12px 20px;
+  font-size: 18px;
+}
+
+input {
+  font-size: 18px;
+}
+
+input[type="radio"] {
+  margin: -3px 5px 0;
+  vertical-align: middle;
+}
+
+input[type="submit"] {
+  width: 90px;
+  height: 40px;
+  color: #deffde;
+  background-color: #003f0a;
 }

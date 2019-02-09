@@ -92,7 +92,9 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
         Date of Death:
         <input type="date" name="dod">
       </div>
-      <input type="submit" value="Submit">
+      <div>
+        <input type="submit" value="Submit">
+      </div>
     </form>
     <br/>
     <!-- print out data -->
