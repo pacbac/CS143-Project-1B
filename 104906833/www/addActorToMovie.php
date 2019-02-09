@@ -2,46 +2,47 @@
 <?php
 include("utils.php");
 
+$movie_list = getMovieList();
 $str_error = "";
 
-function postReview($name, $mid, $rating, $comment){
+function postActorToMovie($mid, $actors, $roles){
   global $db_connection, $str_error;
-  $comment = isset($_POST["comment"]) ? "'$comment'" : "NULL";
-  $query = "INSERT INTO Review (name, mid, rating, comment) VALUES ('$name', $mid, $rating, $comment)";
-  // if fail
-  if(!mysql_query($query, $db_connection)){
-    $str_error = "Could not post to server.";
-    return 1;
+  foreach($actors as $i => $actor){
+    $role = $roles[$i];
+    $aid = getActorID($actor);
+    if($aid < 0){
+      $str_error = "Could not find actor.";
+      return 1;
+    }
+    $query = "INSERT INTO MovieActor VALUES ($mid, $aid, '$role')";
+    // if fail
+    if(!mysql_query($query, $db_connection)){
+      $str_error = "Could not post $actor to server.";
+      return 1;
+    }
   }
   return 0;
 }
 
-$movie_list = getMovieList();
-$name = $_POST["username"];
-$rating = $_POST["rating"];
-$comment = $_POST["comment"];
 $mid = $movie_list[$_POST["movie"]][0];
-// post request sends movie index, so we can get id from movie list
-if(issetStr($name) && isset($mid) && issetStr($rating)
-  && !postReview($name, $mid, $rating, $comment)){
+$actors = $_POST["actor"];
+$roles = $_POST["role"];
+if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
+  && !postActorToMovie($mid, $actors, $roles))
   header("Location: success.php");
-}
 ?>
 <html>
   <head>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Fira+Sans|Source+Sans+Pro:600,700"
-      rel="stylesheet"
-    />
   </head>
   <script>
-    function updateTextInput(val) {
-      document.getElementById('rating-label').innerHTML = val;
+    function addActors(){
+      document.getElementById("new-actor-list").innerHTML += 
+        'Actor: <br>Name: <input type="text" name="actor[]" required> (Last, First) <br>Role: <input type="text" name="role[]" required><br>';
     }
   </script>
   <body>
-    <nav>
+  <nav>
       <div><a href="./" id="logo">143MDb</a></div>
       <div>
         <div class="dropdown">
@@ -75,11 +76,8 @@ if(issetStr($name) && isset($mid) && issetStr($rating)
         </div>
       </div>
     </nav>
-    <h1>Add a New Review</h1>
-    <form action="addComment.php" method="POST">
-      <div>
-        Username: <input type="text" name="username" required>
-      </div>
+    <h1>Add Actor to Movie</h1>
+    <form action="addActorToMovie.php" method="POST">
       <div>
         Movie:
         <select name="movie" required>
@@ -92,16 +90,17 @@ if(issetStr($name) && isset($mid) && issetStr($rating)
           ?>
         </select>
       </div>
-      <div>
-        Rating:
-        <input name="rating" type="range" min="1" max="5" value="3" onchange="updateTextInput(this.value);" required>
-        <span id='rating-label'>3</span>
+      <div id="new-actor-list">
+        Actor: <br>
+        Name: <input type="text" name="actor[]" required> (Last, First) <br>
+        Role: <input type="text" name="role[]" required> <br>
       </div>
       <div>
-        Additional Comments:
-        <textarea name="comment" cols="80" rows="10"></textarea>
+        <button type="button" onclick="addActors()">Add Actors</button>
       </div>
-      <input type="submit" value="Submit">
+      <div>
+        <input type="submit" value="Submit">
+      </div>
     </form>
     <?php print_error($str_error); ?>
   </body>

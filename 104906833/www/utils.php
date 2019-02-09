@@ -67,6 +67,19 @@
     return $movie_list;
   }
 
+  function getActorID($actor){ // $actor is "last, first"
+    global $db_connection;
+    $firstLast = explode(", ", $actor);
+    $first = $firstLast[1];
+    $last = $firstLast[0];
+    $query = "SELECT id FROM Actor WHERE last = '$last' AND first = '$first'";
+    if($rs = mysql_query($query, $db_connection)){
+      if($row = mysql_fetch_row($rs))
+        return $row[0] ? $row[0] : -1;
+    }
+    return -1;
+  }
+
   // use when stuff was echo'd before a failed header redirect attempt
   function issetStr($str){
     return isset($str) && $str != "";
