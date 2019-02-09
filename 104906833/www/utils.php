@@ -28,4 +28,26 @@
     else
       echo "Successfully added actor!";
   }
+
+  function getMaxMovieID(){
+    global $db_connection;
+    $rs = mysql_query("SELECT id FROM MaxMovieID", $db_connection);
+    if (!$rs) {
+      if (mysql_error() != "Query was empty")
+        die('Query failed: ' . mysql_error());
+    } else {
+      if($row = mysql_fetch_row($rs))
+        return ($row[0] ? $row[0] : -1);
+      return -1;
+    }
+  }
+
+  function incrementMovieID($id){
+    global $db_connection;
+    $newID = $id + 1;
+    if(!mysql_query("UPDATE MaxMovieID SET id = $newID WHERE id = $id", $db_connection))
+      print_error("Could not update the next available person ID...");
+    else
+      echo "Successfully added person!";
+  }
 ?>

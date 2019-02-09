@@ -79,6 +79,32 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
       <a href="#">Get Movie Info</a>
     </nav>
     <h1>Add a New Actor/Director</h1>
+    <form action="addPerson.php" method="POST">
+      <div>
+        Type:
+        <input type="radio" name="role" value="Actor" required> Actor
+        <input type="radio" name="role" value="Director"> Director
+      </div>
+      <div>First Name: <input type="text" name="firstname" required></div>
+      <div>Last Name: <input type="text" name="lastname" required></div>
+      <div>
+        Sex:
+        <input type="radio" name="sex" value="Male"> Male
+        <input type="radio" name="sex" value="Female"> Female
+        <input type="radio" name="sex" value="Other"> Other
+      </div>
+      <div>
+        Date of Birth:
+        <input type="date" name="dob" required>
+      </div>
+      <div>
+        Date of Death:
+        <input type="date" name="dod">
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+    <br/>
+    <!-- print out data -->
     <?php
     $table = $_POST["role"];
     $firstname = $_POST["firstname"];
@@ -96,33 +122,5 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
         postPerson($table, $firstname, $lastname, $sex, $dob, $dod);
     }
     ?>
-    <form action="addPerson.php" method="POST">
-      <div>
-        Type:
-        <input type="radio" name="role" value="Actor" required> Actor
-        <input type="radio" name="role" value="Director"> Director
-      </div>
-      <div>First Name: <input type="text" name="firstname" required></div>
-      <div>Last Name: <input type="text" name="lastname" required></div>
-      <div>
-        Sex:
-        <input type="radio" name="sex" value="Male"> Male
-        <input type="radio" name="sex" value="Female"> Female
-        <input type="radio" name="sex" value="Other"> Other
-      </div>
-      <div>
-        Date of Birth:
-        <input type="text" name="dob" required>
-        (YYYY-MM-DD)
-      </div>
-      <div>
-        Date of Death:
-        <input type="text" name="dod">
-        (YYYY-MM-DD)
-      </div>
-      <input type="submit" value="Submit">
-    </form>
-    <br/>
-    <!-- print out data -->
   </body>
 </html>
