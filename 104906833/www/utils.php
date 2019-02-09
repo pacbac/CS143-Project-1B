@@ -123,10 +123,10 @@
   function getActorsListOfMovies($aid){
     global $db_connection;
     $list = array();
-    $query = "SELECT DISTINCT title, year FROM Movie m, MovieActor ma WHERE ma.aid = $aid AND ma.mid = m.id";
+    $query = "SELECT DISTINCT m.id, title, year FROM Movie m, MovieActor ma WHERE ma.aid = $aid AND ma.mid = m.id";
     if($rs = mysql_query($query, $db_connection)){
       while($row = mysql_fetch_row($rs))
-        $list[] = array($row[0], $row[1]);
+        $list[] = array($row[0], $row[1], $row[2]);
     }
     return $list;
   }

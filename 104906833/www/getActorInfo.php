@@ -87,10 +87,11 @@ if($id && isset($id)){
         if(sizeof($movies) > 0){
           echo "<br>";
           foreach($movies as $i => $movie){
-            $title = $movie[0];
-            $year = $movie[1];
+            $id = $movie[0];
+            $title = $movie[1];
+            $year = $movie[2];
             $num = $i + 1;
-            echo "$num. $title ($year)<br>";
+            echo "<a href='./getMovieInfo.php?id=$id'>$num. $title ($year)</a><br>";
           }
         } else
           echo "No record of actor's movies.";
