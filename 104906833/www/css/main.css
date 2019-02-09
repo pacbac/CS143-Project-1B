@@ -5,6 +5,7 @@
   --primary-orange: #ffaf3b;
   --darkbrown: #523100;
   --error-color: #d60808;
+  --success-color: #1ea50e;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -132,4 +133,8 @@ input[type="submit"] {
 
 .error {
   color: var(--error-color);
+}
+
+.success {
+  color: var(--success-color);
 }

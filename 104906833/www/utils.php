@@ -80,6 +80,37 @@
     return -1;
   }
 
+  function getDirectorID($director){ // $director is "last, first"
+    global $db_connection;
+    $firstLast = explode(", ", $director);
+    $first = $firstLast[1];
+    $last = $firstLast[0];
+    $query = "SELECT id FROM Director WHERE last = '$last' AND first = '$first'";
+    if($rs = mysql_query($query, $db_connection)){
+      if($row = mysql_fetch_row($rs))
+        return $row[0] ? $row[0] : -1;
+    }
+    return -1;
+  }
+
+  function getActorToMovieCount($mid, $aid, $role){
+    global $db_connection;
+    if($rs = mysql_query("SELECT COUNT(*) FROM MovieActor WHERE mid = $mid AND aid = $aid AND role = '$role'", $db_connection)){
+      if($row = mysql_fetch_row($rs))
+        return $row[0];
+    }
+    return 1;
+  }
+
+  function getDirectorToMovieCount($mid, $did){
+    global $db_connection;
+    if($rs = mysql_query("SELECT COUNT(*) FROM MovieDirector WHERE mid = $mid AND did = $did", $db_connection)){
+      if($row = mysql_fetch_row($rs))
+        return $row[0];
+    }
+    return 1;
+  }
+
   // use when stuff was echo'd before a failed header redirect attempt
   function issetStr($str){
     return isset($str) && $str != "";

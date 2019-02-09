@@ -4,31 +4,32 @@ include("utils.php");
 
 $movie_list = getMovieList();
 $str_error = "";
+$str_success = "";
 
 function postActorToMovie($mid, $actors, $roles){
-  global $db_connection, $str_error;
+  global $db_connection, $str_error, $str_success;
   foreach($actors as $i => $actor){
     $role = $roles[$i];
     $aid = getActorID($actor);
-    if($aid < 0){
-      $str_error = "Could not find actor.";
-      return 1;
-    }
-    $query = "INSERT INTO MovieActor VALUES ($mid, $aid, '$role')";
-    // if fail
-    if(!mysql_query($query, $db_connection)){
-      $str_error = "Could not post $actor to server.";
-      return 1;
-    }
+    if($aid < 0)
+      $str_error .= "Could not find actor.<br>";
+    if(!getActorToMovieCount($mid, $aid, $role)){
+      // if fail
+      if(!mysql_query("INSERT INTO MovieActor VALUES ($mid, $aid, '$role')", $db_connection))
+        $str_error .= "Could not post $actor to server.<br>";
+      else
+        $str_success .= "Successfully posted $actor to server as $role.<br>";
+    } else
+      $str_error .= "$actor already exists in movie as $role.";
   }
-  return 0;
+  return issetStr($str_error) ? 1 : 0;
 }
 
 $mid = $movie_list[$_POST["movie"]][0];
 $actors = $_POST["actor"];
 $roles = $_POST["role"];
 if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
-  && !postActorToMovie($mid, $actors, $roles))
+  && !postActorToMovie($mid, $actors, $roles) && !issetStr($str_error))
   header("Location: success.php");
 ?>
 <html>
@@ -71,7 +72,7 @@ if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
             <a href="addMovie.php">Add New Movie</a>
             <a href="addComment.php">Add New Comment</a>
             <a href="addActorToMovie.php">Add New Actor to Movie</a>
-            <a href="#">Add New Director to Movie</a>
+            <a href="addDirectorToMovie.php">Add New Director to Movie</a>
           </div>
         </div>
       </div>
@@ -102,6 +103,9 @@ if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
         <input type="submit" value="Submit">
       </div>
     </form>
-    <?php print_error($str_error); ?>
+    <?php
+    echo "<span class='success'>$str_success</span><br>";
+    print_error($str_error);
+    ?>
   </body>
 </html>

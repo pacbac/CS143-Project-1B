@@ -63,7 +63,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
             <a href="addMovie.php">Add New Movie</a>
             <a href="addComment.php">Add New Comment</a>
             <a href="addActorToMovie.php">Add New Actor to Movie</a>
-            <a href="#">Add New Director to Movie</a>
+            <a href="addDirectorToMovie.php">Add New Director to Movie</a>
           </div>
         </div>
       </div>
