@@ -51,7 +51,7 @@ if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
             Browse
           </button>
           <div class="dropdown-list">
-            <a href="#">Get Actor Info</a>
+            <a href="getActorInfo.php">Get Actor Info</a>
             <a href="#">Get Movie Info</a>
           </div>
         </div>

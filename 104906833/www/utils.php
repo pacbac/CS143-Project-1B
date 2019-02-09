@@ -111,6 +111,26 @@
     return 1;
   }
 
+  function getActorInfo($id){
+    global $db_connection;
+    if($rs = mysql_query("SELECT * FROM Actor WHERE id = $id", $db_connection)){
+      if($row = mysql_fetch_row($rs))
+        return $row;
+    }
+    return array();
+  }
+
+  function getActorsListOfMovies($aid){
+    global $db_connection;
+    $list = array();
+    $query = "SELECT DISTINCT title, year FROM Movie m, MovieActor ma WHERE ma.aid = $aid AND ma.mid = m.id";
+    if($rs = mysql_query($query, $db_connection)){
+      while($row = mysql_fetch_row($rs))
+        $list[] = array($row[0], $row[1]);
+    }
+    return $list;
+  }
+
   // use when stuff was echo'd before a failed header redirect attempt
   function issetStr($str){
     return isset($str) && $str != "";
