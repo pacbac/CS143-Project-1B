@@ -32,7 +32,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
   </head>
   <body>
     <nav>
-      <div><a href=index.php id="logo">143MDb</a></div>
+      <div><a href="./" id="logo">143MDb</a></div>
 
       <div>
         <div class="dropdown">

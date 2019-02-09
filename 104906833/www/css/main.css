@@ -4,6 +4,7 @@
   --secondary-orange: #ffe8c7;
   --primary-orange: #ffaf3b;
   --darkbrown: #523100;
+  --error-color: #d60808;
 }
 
 *,
@@ -24,6 +25,7 @@ body {
   font-family: var(--main-font), sans-serif;
   max-width: 1150px;
   margin: 0 auto;
+  font-size: 14px;
 }
 
 h1 {
@@ -120,4 +122,8 @@ input[type="submit"] {
   height: 40px;
   color: #deffde;
   background-color: #003f0a;
+}
+
+.error {
+  color: var(--error-color);
 }
