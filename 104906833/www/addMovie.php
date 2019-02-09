@@ -50,8 +50,8 @@ function postMovie($title, $year, $rating, $company, $genres){
           </button>
           <div class="dropdown-list">
             <a href="addPerson.php">Add New Actor/Director</a>
-            <a href="newMovie.php">Add New Movie</a>
-            <a href="newComment.php">Add New Comment</a>
+            <a href="addMovie.php">Add New Movie</a>
+            <a href="addComment.php">Add New Comment</a>
             <a href="#">Add New Actor to Movie</a>
             <a href="#">Add New Director to Movie</a>
           </div>
@@ -59,7 +59,7 @@ function postMovie($title, $year, $rating, $company, $genres){
       </div>
     </nav>
     <h1>Add New Movie Info</h1>
-    <form action="newMovie.php" method="POST">
+    <form action="addMovie.php" method="POST">
       <div>
         Title: <input type="text" name="title" required> 
       </div>
