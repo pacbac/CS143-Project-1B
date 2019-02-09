@@ -1,0 +1,95 @@
+:root {
+  --main-font: "Fira Sans";
+  --header-font: "Source Sans Pro";
+  --secondary-orange: "#ffd89f";
+  --primary-orange: "#ffaf3b";
+  --darkbrown: "#523100";
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  color: #343434;
+  height: 100%;
+}
+
+body {
+  font-family: var(--main-font), sans-serif;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1150px;
+  margin: auto;
+  padding: 30px 0px 15px;
+  font-family: var(--header-font), sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+
+.dropdown-btn {
+  padding: 16px;
+  font-size: 20px;
+  border: none;
+  background-color: #ffe8c7;
+  cursor: pointer;
+}
+
+.dropdown-list {
+  display: none;
+  position: absolute;
+  right: 0;
+  min-width: 160px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-list a {
+  padding: 12px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  display: block;
+  background-color: white;
+}
+
+.dropdown-list a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-list {
+  display: block;
+}
+
+.dropdown:hover .dropdown-btn {
+  background-color: #ffaf3b;
+}
+
+form {
+  border: blue 3px solid;
+}
+
+form div {
+  width: 400px;
+  padding: 20px;
+  font-size: 14px;
+}
