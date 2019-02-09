@@ -14,16 +14,15 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
     else
       $query .= "($maxPersonID, '$last', '$first', '$dob', $dod)";
     if (mysql_query($query, $db_connection)) {
-      incrementPersonID($maxPersonID);
+      return incrementPersonID($maxPersonID);
     } else
-      print_error("Could not add actor data to the site.");
+      return print_error("Could not add actor data to the site.");
   } else
-    print_error("Could not retrieve next available actor ID.");
+    return print_error("Could not retrieve next available actor ID.");
 }
 ?>
 <html>
   <head>
-    <link />
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Fira+Sans|Source+Sans+Pro:600,700"
@@ -110,9 +109,11 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
       && $dob != "") {
       if ($table == "Actor"
         && !($sex == "Male" || $sex == "Female" || $sex == "Other"))
-        print_error("Actor must have a valid gender to be added to site.");
-      else
-        postPerson($table, $firstname, $lastname, $sex, $dob, $dod);
+        return print_error("Actor must have a valid gender to be added to site.");
+      else {
+        if(!postPerson($table, $firstname, $lastname, $sex, $dob, $dod)) //0 = status ok, 1 = status not ok
+          header("Location: success.php");
+      }
     }
     ?>
   </body>

@@ -5,6 +5,7 @@
 
   function print_error($msg = "Error: Could not query to database."){
     echo $msg;
+    return 1;
   }
 
   function getMaxPersonID(){
@@ -24,9 +25,10 @@
     global $db_connection;
     $newID = $id + 1;
     if(!mysql_query("UPDATE MaxPersonID SET id = $newID WHERE id = $id", $db_connection))
-      print_error("Could not update the next available person ID...");
+      return print_error("Could not update the next available person ID...");
     else
       echo "Successfully added actor!";
+    return 0;
   }
 
   function getMaxMovieID(){
