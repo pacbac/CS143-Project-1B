@@ -8,7 +8,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
   $maxPersonID = getMaxPersonID();
   $query = "INSERT INTO $table VALUES ";
   if ($maxPersonID != -1) {
-    $dod = $dod == "" ? "NULL" : "'$dod'";
+    $dod = !isset($dod) ? "NULL" : "'$dod'";
     if ($table == "Actor")
       $query .= "($maxPersonID, '$last', '$first', '$sex', '$dob', $dod)";
     else
@@ -16,7 +16,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
     if (mysql_query($query, $db_connection)) {
       return incrementPersonID($maxPersonID);
     } else
-      return print_error("Could not add actor data to the site.");
+      return print_error("Could not add $table data to the site.");
   } else
     return print_error("Could not retrieve next available actor ID.");
 }
@@ -31,8 +31,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
   </head>
   <body>
     <nav>
-      <div><a href=index.php id="logo">143MDb</a></div>
-
+      <div><a href="./" id="logo">143MDb</a></div>
       <div>
         <div class="dropdown">
           <button class="dropdown-btn">
@@ -43,7 +42,6 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
             <a href="#">Get Movie Info</a>
           </div>
         </div>
-
         <div class="dropdown">
           <button class="dropdown-btn">
             Search
@@ -52,7 +50,6 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
             <a href="#">Search</a>
           </div>
         </div>
-
         <div class="dropdown">
           <button class="dropdown-btn">
             Input
@@ -104,11 +101,10 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
     $sex = $_POST["sex"];
     $dob = $_POST["dob"];
     $dod = $_POST["dod"];
-    if (($table == "Actor" || $table == "Director")
-      && $firstname != "" && $lastname != ""
-      && $dob != "") {
-      if ($table == "Actor"
-        && !($sex == "Male" || $sex == "Female" || $sex == "Other"))
+    if (isset($table) && isset($firstname) && isset($lastname)
+      && isset($dob)) {
+      // extra check exists because directors don't need gender to be stored
+      if ($table == "Actor" && !isset($sex))
         return print_error("Actor must have a valid gender to be added to site.");
       else {
         if(!postPerson($table, $firstname, $lastname, $sex, $dob, $dod)) //0 = status ok, 1 = status not ok
