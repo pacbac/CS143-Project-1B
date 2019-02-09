@@ -1,7 +1,7 @@
 :root {
   --main-font: "Fira Sans";
   --header-font: "Source Sans Pro";
-  --secondary-orange: #ffd89f;
+  --secondary-orange: #ffe8c7;
   --primary-orange: #ffaf3b;
   --darkbrown: "#523100";
 }
@@ -61,7 +61,7 @@ nav {
   padding: 16px;
   font-size: 20px;
   border: none;
-  background-color: #ffe8c7;
+  background-color: var(--secondary-orange);
   cursor: pointer;
 }
 
@@ -91,7 +91,7 @@ nav {
 }
 
 .dropdown:hover .dropdown-btn {
-  background-color: #ffaf3b;
+  background-color: var(--primary-orange);
 }
 
 form {
