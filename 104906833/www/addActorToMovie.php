@@ -6,16 +6,17 @@ $movie_list = getMovieList();
 $str_error = "";
 $str_success = "";
 
-function postActorToMovie($mid, $actors, $roles){
+function postActorToMovie($mid, $actors, $roles)
+{
   global $db_connection, $str_error, $str_success;
-  foreach($actors as $i => $actor){
+  foreach ($actors as $i => $actor) {
     $role = $roles[$i];
     $aid = getActorID($actor);
-    if($aid < 0)
+    if ($aid < 0)
       $str_error .= "Could not find actor.<br>";
-    if(!getActorToMovieCount($mid, $aid, $role)){
+    if (!getActorToMovieCount($mid, $aid, $role)) {
       // if fail
-      if(!mysql_query("INSERT INTO MovieActor VALUES ($mid, $aid, '$role')", $db_connection))
+      if (!mysql_query("INSERT INTO MovieActor VALUES ($mid, $aid, '$role')", $db_connection))
         $str_error .= "Could not post $actor to server.<br>";
       else
         $str_success .= "Successfully posted $actor to server as $role.<br>";
@@ -28,7 +29,7 @@ function postActorToMovie($mid, $actors, $roles){
 $mid = $movie_list[$_POST["movie"]][0];
 $actors = $_POST["actor"];
 $roles = $_POST["role"];
-if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
+if (isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
   && !postActorToMovie($mid, $actors, $roles) && !issetStr($str_error))
   header("Location: success.php");
 ?>
@@ -38,8 +39,8 @@ if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
   </head>
   <script>
     function addActors(){
-      document.getElementById("new-actor-list").innerHTML += 
-        'Actor: <br>Name: <input type="text" name="actor[]" required> (Last, First) <br>Role: <input type="text" name="role[]" required><br>';
+      document.getElementById("new-actor-list").innerHTML +=
+        '<div>Actor: <br>Name: <input type="text" name="actor[]" required> (Last, First) <br>Role: <input type="text" name="role[]" required><br></div>';
     }
   </script>
   <body>
@@ -83,7 +84,7 @@ if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
         Movie:
         <select name="movie" required>
           <?php
-          foreach($movie_list as $i => $movie){
+          foreach ($movie_list as $i => $movie) {
             $id = $movie[0];
             $title = $movie[1];
             print "<option value='$i'>$title</option>";
@@ -92,12 +93,14 @@ if(isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
         </select>
       </div>
       <div id="new-actor-list">
-        Actor: <br>
-        Name: <input type="text" name="actor[]" required> (Last, First) <br>
-        Role: <input type="text" name="role[]" required> <br>
+        <div>
+          Actor: <br>
+          Name: <input type="text" name="actor[]" required> (Last, First) <br>
+          Role: <input type="text" name="role[]" required> <br>
+        </div>
       </div>
       <div>
-        <button type="button" onclick="addActors()">Add Actors</button>
+        <button type="button" onclick="addActors()">Add Another</button>
       </div>
       <div>
         <input type="submit" value="Submit">

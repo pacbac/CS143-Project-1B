@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<?php 
+<?php
 include("utils.php");
 
-function postMovie($title, $year, $rating, $company, $genres){
+function postMovie($title, $year, $rating, $company, $genres)
+{
   global $db_connection;
   $maxMovieID = getMaxMovieID();
   $query = "INSERT INTO Movie VALUES ($maxMovieID, '$title', $year, '$rating', '$company')";
   if (mysql_query($query, $db_connection)) {
     // insert all genres of the movie into db
-    foreach($genres as $genre){
+    foreach ($genres as $genre) {
       $genreQuery = "INSERT INTO MovieGenre VALUES ($maxMovieID, '$genre')";
-      if(!mysql_query($genreQuery, $db_connection))
+      if (!mysql_query($genreQuery, $db_connection))
         return print_error("Could not add genre $genre to movie.");
     }
     return incrementMovieID($maxMovieID);
@@ -61,7 +62,7 @@ function postMovie($title, $year, $rating, $company, $genres){
     <h1>Add New Movie Info</h1>
     <form action="addMovie.php" method="POST">
       <div>
-        Title: <input type="text" name="title" required> 
+        Title: <input type="text" name="title" required>
       </div>
       <div>
         Year:
@@ -108,17 +109,19 @@ function postMovie($title, $year, $rating, $company, $genres){
         Actor name: <input type="text" name="actorname" required>
         Role name: <input type="text" name="rolename" required>
       </div> -->
-      <input type="submit" value="Submit">
+      <div>
+        <input type="submit" value="Submit">
+      </div>
     </form>
   </body>
-  <?php 
+  <?php
   $title = $_POST["title"];
   $year = $_POST["year"];
   $rating = $_POST["rating"];
   $company = $_POST["company"];
   $genres = $_POST["genre"];
   // if all required params are valid and posting was valid
-  if(issetStr($title) && isset($year) && issetStr($rating) && issetStr($company)
+  if (issetStr($title) && isset($year) && issetStr($rating) && issetStr($company)
     && !postMovie($title, $year, $rating, $company, $genres))
     header("Location: success.php");
   ?>

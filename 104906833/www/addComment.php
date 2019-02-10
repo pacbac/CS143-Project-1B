@@ -4,12 +4,13 @@ include("utils.php");
 
 $str_error = "";
 
-function postReview($name, $mid, $rating, $comment){
+function postReview($name, $mid, $rating, $comment)
+{
   global $db_connection, $str_error;
   $comment = isset($_POST["comment"]) ? "'$comment'" : "NULL";
   $query = "INSERT INTO Review (name, mid, rating, comment) VALUES ('$name', $mid, $rating, $comment)";
   // if fail
-  if(!mysql_query($query, $db_connection)){
+  if (!mysql_query($query, $db_connection)) {
     $str_error = "Could not post to server.";
     return 1;
   }
@@ -22,8 +23,8 @@ $rating = $_POST["rating"];
 $comment = $_POST["comment"];
 $mid = $movie_list[$_POST["movie"]][0];
 // post request sends movie index, so we can get id from movie list
-if(issetStr($name) && isset($mid) && issetStr($rating)
-  && !postReview($name, $mid, $rating, $comment)){
+if (issetStr($name) && isset($mid) && issetStr($rating)
+  && !postReview($name, $mid, $rating, $comment)) {
   header("Location: success.php");
 }
 ?>
@@ -84,7 +85,7 @@ if(issetStr($name) && isset($mid) && issetStr($rating)
         Movie:
         <select name="movie" required>
           <?php
-          foreach($movie_list as $i => $movie){
+          foreach ($movie_list as $i => $movie) {
             $id = $movie[0];
             $title = $movie[1];
             print "<option value='$i'>$title</option>";
@@ -101,7 +102,9 @@ if(issetStr($name) && isset($mid) && issetStr($rating)
         Additional Comments:
         <textarea name="comment" cols="80" rows="10"></textarea>
       </div>
-      <input type="submit" value="Submit">
+      <div>
+        <input type="submit" value="Submit">
+      </div>
     </form>
     <?php print_error($str_error); ?>
   </body>
