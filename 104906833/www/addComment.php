@@ -99,7 +99,7 @@ if (issetStr($name) && isset($mid) && issetStr($rating)
         <span id='rating-label'>3</span>
       </div>
       <div>
-        Additional Comments:
+        Additional Comments: <br>
         <textarea name="comment" cols="80" rows="10"></textarea>
       </div>
       <div>

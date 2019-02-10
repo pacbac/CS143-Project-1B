@@ -132,7 +132,7 @@
   function getActorsListOfMovies($aid){
     global $db_connection;
     $list = array();
-    $query = "SELECT DISTINCT m.id, title, year FROM Movie m, MovieActor ma WHERE ma.aid = $aid AND ma.mid = m.id";
+    $query = "SELECT DISTINCT m.id, title, year FROM Movie m, MovieActor ma WHERE ma.aid = $aid AND ma.mid = m.id ORDER BY m.year DESC";
     if($rs = mysql_query($query, $db_connection)){
       while($row = mysql_fetch_row($rs))
         $list[] = array($row[0], $row[1], $row[2]);
@@ -143,10 +143,21 @@
   function getMoviesListOfActors($mid){
     global $db_connection;
     $list = array();
-    $query = "SELECT DISTINCT id, last, first, ma.role FROM Actor a, MovieActor ma WHERE ma.mid = $mid AND ma.aid = a.id";
+    $query = "SELECT DISTINCT id, last, first, ma.role FROM Actor a, MovieActor ma WHERE ma.mid = $mid AND ma.aid = a.id ORDER BY last";
     if($rs = mysql_query($query, $db_connection)){
       while($row = mysql_fetch_row($rs))
         $list[] = array($row[0], $row[1], $row[2], $row[3]);
+    }
+    return $list;
+  }
+
+  function getMoviesListOfDirectors($mid){
+    global $db_connection;
+    $list = array();
+    $query = "SELECT DISTINCT last, first FROM Director d, MovieDirector md WHERE md.mid = $mid AND md.did = d.id";
+    if($rs = mysql_query($query, $db_connection)){
+      while($row = mysql_fetch_row($rs))
+        $list[] = array($row[0], $row[1]);
     }
     return $list;
   }
@@ -159,6 +170,16 @@
         $genres[] = $row[0];
     }
     return $genres;
+  }
+
+  function getReviews($mid){
+    global $db_connection;
+    $reviews = array();
+    if($rs = mysql_query("SELECT DISTINCT * FROM Review WHERE mid = $mid")){
+      while($row = mysql_fetch_row($rs))
+        $reviews[] = $row;
+    }
+    return $reviews;
   }
 
   // use when stuff was echo'd before a failed header redirect attempt

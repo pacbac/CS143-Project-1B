@@ -103,10 +103,10 @@ form {
   margin: 20px 0;
   border: #ff5733 3px solid;
   padding: 25px 15px;
+  background-color: #f4f4f4;
 }
 
 form div {
-  width: 400px;
   padding: 12px 20px;
   font-size: 18px;
 }
@@ -120,25 +120,35 @@ input[type="radio"] {
   vertical-align: middle;
 }
 
-#new-actor-list div {
+#new-actor-list div, #new-director-list div {
   margin: 6px 0;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 3px 0;
+
+}
+
+#new-actor-list > div > span, #new-director-list > div > span {
+  display: inline-block;
+  width: 70px;
 }
 
 #new-actor-list br {
   margin: 5px 0;
 }
 
+textarea {
+  resize: none;
+}
+
 button {
   width: 100px;
   height: 30px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 input[type="submit"] {
-  width: 90px;
   height: 40px;
+  padding: 3px 15px;
   color: #deffde;
   background-color: #003f0a;
   border-width: 1.5px;
@@ -149,6 +159,8 @@ input[type="submit"] {
 
 .error {
   color: var(--error-color);
+  margin-top: 15px;
+  display: inline-block;
 }
 
 .success {
@@ -163,6 +175,7 @@ input[type="submit"] {
   width: fit-content;
   height: fit-content;
   padding: 5px;
+  color: gray;
 }
 
 .genre {
@@ -175,11 +188,51 @@ input[type="submit"] {
   margin-right: 3px;
 }
 
+ul {
+  margin-top: 5px;
+}
+
 ul > li {
   list-style-position: inside;
   padding-bottom: 5px;
+  padding-left: 15px;
+  color: var(--darkbrown);
 }
 
 ul a {
   color: var(--darkbrown);
+}
+
+.divider {
+  border-bottom-style: solid;
+  border-width: 1.5px;
+  border-color: var(--shadow-color);
+}
+
+.review {
+  box-shadow: 2px 2px 4px var(--shadow-color);
+  background-color: white;
+  margin: 15px 0;
+}
+
+.review-summary {
+  background-color: white;
+  margin: 15px 0;
+}
+
+.review > span {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* [number] stars for the review */
+.review > p:not(.comment) {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.comment {
+  font-size: 16px;
 }

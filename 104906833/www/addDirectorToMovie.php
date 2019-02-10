@@ -85,8 +85,10 @@ if(isset($mid) && isset($director)
         </select>
       </div>
       <div id="new-director-list">
-        Director: <br>
-        Name: <input type="text" name="director" required> (Last, First) <br>
+        <h3>Director</h3>
+        <div>
+        <span>Name:</span><input type="text" name="director" required> (Last, First)
+        </div>
       </div>
       <div>
         <input type="submit" value="Submit">

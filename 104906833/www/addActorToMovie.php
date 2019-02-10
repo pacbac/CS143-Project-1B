@@ -93,14 +93,16 @@ if (isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
         </select>
       </div>
       <div id="new-actor-list">
+        <h3>Actor</h3>
         <div>
-          Actor: <br>
-          Name: <input type="text" name="actor[]" required> (Last, First) <br>
-          Role: <input type="text" name="role[]" required> <br>
+          <span>Name:</span><input type="text" name="actor[]" required> (Last, First)
+        </div>
+        <div>
+          <span>Role:</span><input type="text" name="role[]" required>
         </div>
       </div>
       <div>
-        <button type="button" onclick="addActors()">Add Another</button>
+        <button id="add-actor-btn" type="button" onclick="addActors()">Add Another</button>
       </div>
       <div>
         <input type="submit" value="Submit">

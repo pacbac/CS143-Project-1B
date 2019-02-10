@@ -69,17 +69,16 @@ if($id && isset($id)){
         print_error("<h2>$str_error</h2>");
     ?>
     <form>
-      <div>
-        Sex: <?php echo $sex ?> <br>
+      <div style="padding-top: 0">
+        <h3>Basic Information</h3>
+        <div style="padding: 0; margin: 5px; border-left-style: solid">
+          <div style="padding: 3px 5px">Sex: <?php echo $sex ?></div>
+          <div style="padding: 3px 5px">Date of Birth: <?php echo $dob ?></div>
+          <div style="padding: 3px 5px">Date of Death: <?php echo $dod ?></div>
+        </div>
       </div>
       <div>
-        Date of Birth: <?php echo $dob ?> <br>
-      </div>
-      <div>
-        Date of Death: <?php echo $dod ?> <br>
-      </div>
-      <div>
-        Movies played in:
+        <h3>Movies</h3>
         <?php
         if(sizeof($movies) > 0){
           echo "<ul>";
@@ -87,7 +86,7 @@ if($id && isset($id)){
             $id = $movie[0];
             $title = $movie[1];
             $year = $movie[2];
-            echo "<li><a href='./getMovieInfo.php?id=$id'>$title</a> ($year)</li>";
+            echo "<li><a href='./getMovieInfo.php?id=$id'>$title</a> | $year</li>";
           }
           echo "</ul>";
         } else
