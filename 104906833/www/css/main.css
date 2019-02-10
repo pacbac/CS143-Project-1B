@@ -29,6 +29,7 @@ body {
   margin: 0 auto;
   padding: 0 30px;
   font-size: 14px;
+  position: relative;
 }
 
 h1 {

@@ -31,44 +31,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
     />
   </head>
   <body>
-    <nav>
-      <div><a href="./" id="logo">143MDb</a></div>
-
-      <div>
-        <div class="dropdown">
-          <button class="dropdown-btn">
-            Browse
-          </button>
-          <div class="dropdown-list">
-            <a href="getActorInfo.php">Get Actor Info</a>
-            <a href="getMovieInfo.php">Get Movie Info</a>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <button class="dropdown-btn">
-            Search
-          </button>
-          <div class="dropdown-list">
-            <a href="#">Search</a>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <button class="dropdown-btn">
-            Input
-          </button>
-          <div class="dropdown-list">
-            <a href="addPerson.php">Add New Actor/Director</a>
-            <a href="addMovie.php">Add New Movie</a>
-            <a href="addComment.php">Add New Comment</a>
-            <a href="addActorToMovie.php">Add New Actor to Movie</a>
-            <a href="addDirectorToMovie.php">Add New Director to Movie</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-
+    <?php include('nav.html') ?>
     <div style="margin-top: 15px;">
       <img src="./imgs/imdb.png" alt="" style="width: 100%;">
     </div>
