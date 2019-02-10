@@ -29,11 +29,12 @@ function search_actor($input)
   $i = 0;
   foreach ($searchWords as $i => $word) {
     if ($i == 0) {
-      $query .= " (first LIKE '%$word%' OR last LIKE '%$word')";
+      $query .= " (first LIKE '%$word%' OR last LIKE '%$word%')";
     } else {
-      $query .= " AND (first LIKE '%$word%' OR last LIKE '%$word')";
+      $query .= " AND (first LIKE '%$word%' OR last LIKE '%$word%')";
     }
   }
+  echo "$query";
   if ($query != "SELECT * FROM Actor WHERE")
     return mysql_query($query, $db_connection);
   else return 0;
