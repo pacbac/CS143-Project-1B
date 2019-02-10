@@ -39,9 +39,14 @@ function search_actor($input)
   else return 0;
 }
 
-function make_table($rs)
+function make_table($rs, $type)
 {
   if ($row = mysql_fetch_row($rs)) {
+    if ($type == "movie") {
+      echo "<h2>Movies</h2>";
+    } else if ($type == "actor") {
+      echo "<h2>Actors</h2>";
+    }
     echo "<table border=1 cellspacing=1 cellpadding=2>";
     $i = 0;
     echo "<tr align=center>";
@@ -73,6 +78,7 @@ function make_table($rs)
       href="https://fonts.googleapis.com/css?family=Fira+Sans|Source+Sans+Pro:600,700"
       rel="stylesheet"
     />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/search.css" />
   </head>
   <body>
     <nav>
@@ -125,16 +131,22 @@ function make_table($rs)
       $movies = search_movie($name);
       $actors = search_actor($name);
       $numTables = 0;
+      echo "<h2 id=\"results\">Showing results for \"$name\"</h2>";
       if ($movies) {
-        $mv_tbl = make_table($movies);
+        $mv_tbl = make_table($movies, "movie");
         if ($mv_tbl) $numTables += 1;
       }
       if ($actors) {
-        $act_tbl = make_table($actors);
+        $act_tbl = make_table($actors, "actor");
         if ($act_tbl) $numTables += 1;
       }
       if (!$numTables) {
-        echo ("<h1>No results found for: $name</h1>");
+        echo "
+          <script>
+            let e = document.getElementById('results');
+            e.innerHTML = '<h2>No results found for \"$name\"</h2>';
+          </script>
+        ";
       }
     }
     mysql_close($db_connection);

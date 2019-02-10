@@ -27,6 +27,7 @@ body {
   font-family: var(--main-font), sans-serif;
   max-width: 1150px;
   margin: 0 auto;
+  padding: 0 30px;
   font-size: 14px;
 }
 
