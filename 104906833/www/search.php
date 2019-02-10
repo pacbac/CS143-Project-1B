@@ -34,7 +34,6 @@ function search_actor($input)
       $query .= " AND (first LIKE '%$word%' OR last LIKE '%$word%')";
     }
   }
-  echo "$query";
   if ($query != "SELECT * FROM Actor WHERE")
     return mysql_query($query, $db_connection);
   else return 0;
@@ -90,17 +89,14 @@ function make_table($rs, $type)
             Browse
           </button>
           <div class="dropdown-list">
-            <a href="#">Get Actor Info</a>
-            <a href="#">Get Movie Info</a>
+            <a href="getActorInfo.php">Get Actor Info</a>
+            <a href="getMovieInfo.php">Get Movie Info</a>
           </div>
         </div>
         <div class="dropdown">
-          <button class="dropdown-btn">
+          <button class="dropdown-btn" onclick="location.href='./search.php'">
             Search
           </button>
-          <div class="dropdown-list">
-            <a href="#">Search</a>
-          </div>
         </div>
         <div class="dropdown">
           <button class="dropdown-btn">
@@ -111,7 +107,7 @@ function make_table($rs, $type)
             <a href="addMovie.php">Add New Movie</a>
             <a href="addComment.php">Add New Comment</a>
             <a href="addActorToMovie.php">Add New Actor to Movie</a>
-            <a href="#">Add New Director to Movie</a>
+            <a href="addDirectorToMovie.php">Add New Director to Movie</a>
           </div>
         </div>
       </div>
