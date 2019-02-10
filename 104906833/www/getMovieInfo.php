@@ -88,7 +88,7 @@ if($id && isset($id)){
     <form action="addComment.php">
       <div style="padding-top: 0">
         <div style="padding: 0; margin-bottom: 10px">
-          <h3>Prod. by <?php echo $company ?></h3>
+          <h3>Prod. by <?php echo ($company ? $company : "Unknown company") ?></h3>
         </div>
         <div class="rating">
           <?php echo $rating ?>
@@ -106,7 +106,7 @@ if($id && isset($id)){
       <div>
         <h3>Directors</h3>
         <?php
-        if(sizeof($actors) > 0){
+        if(sizeof($directors) > 0){
           echo "<ul>";
           foreach($directors as $director){
             $id = $director[0];
@@ -115,7 +115,11 @@ if($id && isset($id)){
           }
           echo "</ul>";
         } else
-          echo "No record of actors for this movie.";
+          echo (
+            "<div class='error-div'>
+              No record of directors for this movie.
+            </div>"
+          );
         ?>
       </div>
       <div class='divider'>
@@ -131,7 +135,11 @@ if($id && isset($id)){
           }
           echo "</ul>";
         } else
-          echo "No record of actors for this movie.";
+          echo (
+            "<div class='error-div'>
+              No record of actors for this movie.
+            </div>"
+          );
         ?>
       </div>
       <div>

@@ -90,7 +90,7 @@ if($id && isset($id)){
           }
           echo "</ul>";
         } else
-          echo "No record of actor's movies.";
+          echo "<div class='error-div'>No record of actor's movies.</div>";
         ?>
       </div>
     </form>
