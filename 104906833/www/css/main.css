@@ -237,3 +237,8 @@ ul a {
 .comment {
   font-size: 16px;
 }
+
+.error-div {
+  padding-top: 5px;
+  padding-left: 0;
+}

@@ -45,7 +45,11 @@
       </div>
     </nav>
     <h1>Success!</h1>
-    <h3>Your entry has been added to our website.</h3>
-    <a href="./" title="Return to the previous page">Go to home</a>
+    <div class='error-div'>
+      <h2>Your entry has been added to our website.</h2>
+    </div>
+    <div style="margin-top: 10px">
+      <a href="./">Go to home</a>
+    </div>
   </body>
 </html>
