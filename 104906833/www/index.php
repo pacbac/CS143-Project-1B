@@ -41,7 +41,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
           </button>
           <div class="dropdown-list">
             <a href="getActorInfo.php">Get Actor Info</a>
-            <a href="#">Get Movie Info</a>
+            <a href="getMovieInfo.php">Get Movie Info</a>
           </div>
         </div>
 

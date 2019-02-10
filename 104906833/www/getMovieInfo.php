@@ -5,23 +5,25 @@ include("utils.php");
 $str_error = "";
 
 $id = $_GET["id"];
-$name = "";
-$sex = "";
-$dob = "";
-$dod = "";
-$movies = array();
+$title = "";
+$year = "";
+$rating = "";
+$company = "";
+$genres = array();
+$actors = array();
 if($id && isset($id)){
-  $actorInfo = getActorInfo($id);
-  if(sizeof($actorInfo) > 0){
-    $name = implode(" ", array($actorInfo[2], $actorInfo[1]));
-    $sex = $actorInfo[3];
-    $dob = $actorInfo[4];
-    $dod = isset($actorInfo[5]) ? $actorInfo[5] : "N/A";
-    $movies = getActorsListOfMovies($id);
+  $movieInfo = getMovieInfo($id);
+  if(sizeof($movieInfo) > 0){
+    $title = $movieInfo[1];
+    $year = $movieInfo[2];
+    $rating = $movieInfo[3];
+    $company = $movieInfo[4];
+    $actors = getMoviesListOfActors($id);
+    $genres = getMoviesGenres($id);
   } else
-  $str_error = "Could not retrieve actor. Is the ID correct?";
+  $str_error = "Could not retrieve movie. Is the ID correct?";
 } else
-  $str_error = "Could not retrieve actor. Did you supply an actor ID to look up?";
+  $str_error = "Could not retrieve movie. Did you supply a movie ID to look up?";
 
 ?>
 <html>
@@ -63,35 +65,40 @@ if($id && isset($id)){
         </div>
       </div>
     </nav>
-    <h1><?php echo (!issetStr($str_error) ? $name : "Actor Information Not Found") ?></h1>
+    <h1><?php echo (!issetStr($str_error) ? "$title ($year)" : "Movie Information Not Found") ?></h1>
     <?php 
       if(issetStr($str_error))
         print_error("<h2>$str_error</h2>");
     ?>
     <form>
       <div>
-        Sex: <?php echo $sex ?> <br>
+        <div class="rating">
+          <?php echo $rating ?>
+        </div>
+      </div>
+      <div class="genres">
+        <?php 
+        if(sizeof($genres) > 0){
+          foreach($genres as $genre)
+            echo "<span class='genre'>$genre</span>";
+        } else
+          echo "No recorded genres for this movie." 
+        ?>
       </div>
       <div>
-        Date of Birth: <?php echo $dob ?> <br>
-      </div>
-      <div>
-        Date of Death: <?php echo $dod ?> <br>
-      </div>
-      <div>
-        Movies played in:
+        Actors:
         <?php
-        if(sizeof($movies) > 0){
+        if(sizeof($actors) > 0){
           echo "<ul>";
-          foreach($movies as $movie){
-            $id = $movie[0];
-            $title = $movie[1];
-            $year = $movie[2];
-            echo "<li><a href='./getMovieInfo.php?id=$id'>$title</a> ($year)</li>";
+          foreach($actors as $actor){
+            $id = $actor[0];
+            $name = implode(" ", array($actor[2], $actor[1]));
+            $role = $actor[3];
+            echo "<li><a href='./getActorInfo.php?id=$id'>$name</a> ($role)</li>";
           }
           echo "</ul>";
         } else
-          echo "No record of actor's movies.";
+          echo "No record of actors for this movie.";
         ?>
       </div>
     </form>

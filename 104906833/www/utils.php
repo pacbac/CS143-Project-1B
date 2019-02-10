@@ -120,6 +120,15 @@
     return array();
   }
 
+  function getMovieInfo($id){
+    global $db_connection;
+    if($rs = mysql_query("SELECT * FROM Movie WHERE id = $id", $db_connection)){
+      if($row = mysql_fetch_row($rs))
+        return $row;
+    }
+    return array();
+  }
+
   function getActorsListOfMovies($aid){
     global $db_connection;
     $list = array();
@@ -129,6 +138,27 @@
         $list[] = array($row[0], $row[1], $row[2]);
     }
     return $list;
+  }
+
+  function getMoviesListOfActors($mid){
+    global $db_connection;
+    $list = array();
+    $query = "SELECT DISTINCT id, last, first, ma.role FROM Actor a, MovieActor ma WHERE ma.mid = $mid AND ma.aid = a.id";
+    if($rs = mysql_query($query, $db_connection)){
+      while($row = mysql_fetch_row($rs))
+        $list[] = array($row[0], $row[1], $row[2], $row[3]);
+    }
+    return $list;
+  }
+
+  function getMoviesGenres($mid){
+    global $db_connection;
+    $genres = array();
+    if($rs = mysql_query("SELECT DISTINCT genre FROM MovieGenre mg WHERE mid = $mid", $db_connection)){
+      while($row = mysql_fetch_row($rs))
+        $genres[] = $row[0];
+    }
+    return $genres;
   }
 
   // use when stuff was echo'd before a failed header redirect attempt
