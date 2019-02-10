@@ -43,6 +43,7 @@ if($id && isset($id)){
 ?>
 <html>
   <head>
+    <title><?php echo (!issetStr($str_error) ? "Movie: $title | $year" : "Movie Information Not Found") ?></title>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
   </head>
   <body>

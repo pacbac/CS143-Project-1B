@@ -35,6 +35,7 @@ if (isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
 ?>
 <html>
   <head>
+    <title>Add Actor To Movie</title>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
   </head>
   <script>

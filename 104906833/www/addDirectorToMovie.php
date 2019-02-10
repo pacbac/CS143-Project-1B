@@ -33,6 +33,7 @@ if(isset($mid) && isset($director)
 ?>
 <html>
   <head>
+    <title>Add Director To Movie</title>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
   </head>
   <body>

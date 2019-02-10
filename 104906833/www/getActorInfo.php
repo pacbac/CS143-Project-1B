@@ -26,6 +26,7 @@ if($id && isset($id)){
 ?>
 <html>
   <head>
+    <title><?php echo (!issetStr($str_error) ? "Actor: $name" : "Actor Information Not Found") ?></title>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
   </head>
   <body>

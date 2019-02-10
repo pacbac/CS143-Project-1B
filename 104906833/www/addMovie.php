@@ -21,6 +21,7 @@ function postMovie($title, $year, $rating, $company, $genres)
 ?>
 <html>
   <head>
+    <title>Add New Movie Info</title>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
   </head>
   <body>

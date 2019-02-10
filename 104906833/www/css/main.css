@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Fira Sans";
+  src: url("../fonts/FiraSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("../fonts/SourceSansPro-Regular.ttf");
+}
+
 :root {
   --main-font: "Fira Sans";
   --header-font: "Source Sans Pro";

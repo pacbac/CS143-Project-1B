@@ -1,10 +1,7 @@
 <html>
   <head>
+    <title>Successful entry</title>
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Fira+Sans|Source+Sans+Pro:600,700"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <?php include('nav.html') ?>
