@@ -56,14 +56,39 @@ function make_table($rs, $type)
       $i++;
     }
     echo "</tr>";
-    do {
-      echo "<tr align=center>";
-      for ($i = 0; $i < sizeof($row); $i++) {
-        $nonnull = ($row[$i] ? $row[$i] : "N/A");
-        echo "<td>$nonnull</td>";
-      }
-      echo "</tr>";
-    } while ($row = mysql_fetch_row($rs));
+    if ($type == "movie") {
+      do {
+        echo "<tr align=center>";
+        $id = $row[0];
+        for ($i = 0; $i < sizeof($row); $i++) {
+          $id = $row[0];
+          if ($row[$i]) {
+            if ($i == 1) {
+              echo "<td><a href='./getMovieInfo.php?id=$id'>$row[$i]</a></td>";
+            } else {
+              echo "<td>$row[$i]</td>";
+            }
+          } else echo "<td>N/A</td>";
+        }
+        echo "</tr>";
+      } while ($row = mysql_fetch_row($rs));
+    } else if ($type == "actor") {
+      do {
+        echo "<tr align=center>";
+        $id = $row[0];
+        for ($i = 0; $i < sizeof($row); $i++) {
+          $id = $row[0];
+          if ($row[$i]) {
+            if ($i == 1 || $i == 2) {
+              echo "<td><a href='./getActorInfo.php?id=$id'>$row[$i]</a></td>";
+            } else {
+              echo "<td>$row[$i]</td>";
+            }
+          } else echo "<td>N/A</td>";
+        }
+        echo "</tr>";
+      } while ($row = mysql_fetch_row($rs));
+    }
     echo "</table>";
     return 1;
   } else {
