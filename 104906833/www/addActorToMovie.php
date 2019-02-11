@@ -77,6 +77,7 @@ if (isset($mid) && sizeof($actors) > 0 && sizeof($roles) > 0
       </div>
     </form>
     <?php
+    mysql_close($db_connection);
     echo "<span class='success'>$str_success</span><br>";
     print_error($str_error);
     ?>

@@ -74,6 +74,7 @@ function postPerson($table, $first, $last, $sex, $dob, $dod)
           header("Location: success.php");
       }
     }
+    mysql_close($db_connection);
     ?>
   </body>
 </html>

@@ -147,6 +147,8 @@ if($id && isset($id)){
                 No reviews for this movie yet. Be the first to add one!
               </div>"
             );
+            
+          mysql_close($db_connection);
         ?>
         <input type="submit" value="Add review">
       </div>

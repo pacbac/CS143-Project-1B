@@ -70,6 +70,9 @@ if (issetStr($name) && isset($mid) && issetStr($rating)
         <input type="submit" value="Submit">
       </div>
     </form>
-    <?php print_error($str_error); ?>
+    <?php
+    mysql_close($db_connection);
+    print_error($str_error); 
+    ?>
   </body>
 </html>

@@ -91,5 +91,6 @@ function postMovie($title, $year, $rating, $company, $genres)
   if (issetStr($title) && isset($year) && issetStr($rating) && issetStr($company)
     && !postMovie($title, $year, $rating, $company, $genres))
     header("Location: success.php");
+  mysql_close($db_connection);
   ?>
 </html>

@@ -59,6 +59,8 @@ if($id && isset($id)){
           echo "</ul>";
         } else
           echo "<div class='error-div'>No record of actor's movies.</div>";
+        
+        mysql_close($db_connection);
         ?>
       </div>
     </form>

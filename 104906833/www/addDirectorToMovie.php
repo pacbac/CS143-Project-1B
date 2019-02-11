@@ -62,6 +62,9 @@ if(isset($mid) && isset($director)
         <input type="submit" value="Submit">
       </div>
     </form>
-    <?php print_error($str_error); ?>
+    <?php
+    mysql_close($db_connection);
+    print_error($str_error);
+    ?>
   </body>
 </html>
